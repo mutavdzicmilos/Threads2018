@@ -1,5 +1,6 @@
 /*
- * Created on May 9, 2018
+ * Created on May 9, 2018 by Devedzic
+ * updated on May 21, 2018 by Mutavdzic, added 3rd thread
  *
  */
 package music;
@@ -40,14 +41,17 @@ public class Singer extends Thread {
     }
     
     private synchronized void sing() {
-        while (!stopIt) {
-            if (this.voice == Voice.FIRST) {
-                this.synch.singFirstVoice(performance.getLyrics(), performance.getDelay());
-            } else {
-                this.synch.singSecondVoice(performance.getLyrics(), performance.getDelay());
-            }
-        }
-    }
+		while (!stopIt) {
+			if (this.voice == voice.FIRST)
+				this.synch.singFirstVoice(performance.getLyrics(), performance.getDelay());
+			else if (this.voice == voice.SECOND)
+				this.synch.singSecondVoice(performance.getLyrics(), performance.getDelay());
+			else
+				this.synch.singChorus(performance.getLyrics(), performance.getDelay());
+		}
+	}
+
+
     
     public String getSingerName() {
         return singerName;
